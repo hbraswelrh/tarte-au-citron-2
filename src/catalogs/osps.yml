@@ -1,0 +1,360 @@
+# An adapted copy of the OSPS-QA.yaml for demo - https://github.com/ossf/security-baseline/blob/main/baseline/OSPS-QA.yaml
+metadata:
+  id: OSPS-B
+  title: Open Source Project Security Baseline
+  description: |
+    The Open Source Project Security (OSPS) Baseline is a set of security
+    criteria that projects should meet to demonstrate a strong security posture.
+  applicability-categories:
+    - id: Maturity1
+      title: Maturity Level 1
+      description: |
+        Any code or non-code project with any number of maintainers or users
+    - id: Maturity2
+      title: Maturity Level 2
+      description: |
+        Any code project that has at least 2 maintainers and a small number of
+        consistent users
+    - id: Maturity3
+      title: Maturity Level 3
+      description: |
+        Any code project that has a large number of consistent users
+  mapping-references:
+    - id: 800-161
+      title: Cybersecurity Supply Chain Risk Management Practices for Systems and Organizations
+      version: "1.1"
+      url: https://csrc.nist.gov/pubs/sp/800/161/r1/upd1/final
+    - id: SSDF
+      title: NIST Secure Software Development Framework (SP 800-218)
+      version: "1.1"
+      url: https://csrc.nist.gov/pubs/sp/800/218/final
+      description: |
+        The Secure Software Development Framework (SSDF) is a set of fundamental,
+        sound, and secure software development practices based on established
+        secure software development practice documents from organizations such as
+        BSA, OWASP, and SAFECode. Few software development life cycle (SDLC) models
+        explicitly address software security in detail, so practices like those in
+        the SSDF need to be added to and integrated with each SDLC implementation.
+        Following the SSDF practices should help software producers reduce the
+        number of vulnerabilities in released software, reduce the potential impact
+        of the exploitation of undetected or unaddressed vulnerabilities, and
+        address the root causes of vulnerabilities to prevent recurrences. Also,
+        because the SSDF provides a common language for describing secure software
+        development practices, software producers and acquirers can use it to foster
+        their communications for procurement processes and other management activities.
+control-families:
+  - title: Quality
+    description: |
+      Quality focuses on the processes and
+      practices used to ensure the quality and
+      reliability of the project's source code and
+      software assets. These controls help ensure
+      that the project's source code is well
+      maintained, secure, and reliable, reducing the
+      risk of defects or vulnerabilities in the
+      software.
+    controls:
+      - id: OSPS-QA-07
+        title: |
+          The project's version control system MUST require at least one
+          non-author approval of changes to the primary branch.
+        objective: |
+          Ensure that the project's version control system requires at least one
+          non-author approval of changes before merging into the release or primary
+          branch.
+        guideline-mappings:
+          - reference-id: BPB
+            entries:
+              - reference-id: B-G-3
+          - reference-id: Scorecard
+            entries:
+              - reference-id:  Code-Review
+          - reference-id: PSSCRM
+            entries:
+              - reference-id: G2.4
+              - reference-id: P3.3
+              - reference-id: P3.5
+          - reference-id: PCIDSS
+            entries:
+              - reference-id: 6.2.3.1
+              - reference-id: 6.4.2
+              - reference-id: 6.5.4
+          - reference-id: 800-161
+            entries:
+              - reference-id: AC-5
+              - reference-id: AU-6
+              - reference-id: PL-8
+              - reference-id: SA-15
+              - reference-id: SR-3
+          # Adding a non-existing mapping for testing
+          - reference-id: SSDF
+            entries:
+              - reference-id: PS1
+        assessment-requirements:
+          - id: OSPS-QA-07.01
+            text: |
+              When a commit is made to the primary branch, the project's version
+              control system MUST require at least one non-author approval of the
+              changes before merging.
+            applicability:
+              - Maturity Level 3
+            recommendation: |
+              Configure the project's version control system to require at least one
+              non-author approval of changes before merging into the release or
+              primary branch. This can be achieved by requiring a pull request to be
+              reviewed and approved by at least one other contributor before it can
+              be merged.
+            # Note: this below section has been added for testing purposes
+            recommended-parameters:
+              - id: main_branch_min_approvals
+                description: Minimum approvals on the default branch
+                default: 1
+
+  - title: Legal
+    description: |
+      Legal focuses on the policies and procedures
+      that govern the project's licensing and 
+      intellectual property. These controls help ensure 
+      that the project's source code is distributed under 
+      a recognized and legally enforceable open source 
+      software license, reducing the risk of intellectual 
+      property disputes or licensing violations.
+    controls:
+      - id: OSPS-LE-02
+        title: |
+          All licenses for the project MUST meet the OSI Open Source Definition
+          or the FSF Free Software Definition.
+        objective: |
+          Ensure that the project's source code is distributed under a recognized
+          and legally enforceable open source software license, providing clarity on 
+          how the code can be used and shared by others.
+        guideline-mappings:
+          - reference-id: BPB
+            entries:
+              - reference-id: B-B-6
+              - reference-id: B-B-7
+          - reference-id: CRA
+            entries:
+              - reference-id: 1.2b
+          - reference-id: SSDF
+            entries:
+              - reference-id: PO.3.2
+          - reference-id: CSF
+            entries:
+              - reference-id: GV.OC-03
+          - reference-id: Scorecard
+            entries:
+              - reference-id: License
+          - reference-id: PSSCRM
+            entries:
+              - reference-id: G1.2
+          - reference-id: PCIDSS
+            entries:
+              - reference-id: 3.2.1
+          - reference-id: 800-161
+            entries:
+              - reference-id: PL-4
+        assessment-requirements:
+          - id: OSPS-LE-02.01
+            text: |
+              While active, the license for the source code MUST meet the OSI Open 
+              Source Definition or the FSF Free Software Definition.
+            applicability:
+              - Maturity Level 1
+              - Maturity Level 2
+              - Maturity Level 3
+            recommendation: |
+              Add a LICENSE file to the project's repo with a license that is an
+              approved license by the Open Source Initiative (OSI), or a free 
+              license as approved by the Free Software Foundation (FSF). Examples of 
+              such licenses include the MIT, BSD 2-clause, BSD 3-clause revised, 
+              Apache 2.0, Lesser GNU General Public License (LGPL), and the GNU 
+              General Public License (GPL). Releasing to the public domain meets 
+              this control if there are no other encumbrances such as patents.
+            recommended-parameters:
+              - id: license_for_released_software_assets
+                description: License requirements for released software assets.
+                default: Apache 2.0
+          - id: OSPS-LE-02.02
+            text: |
+              While active, the license for the released software assets MUST meet 
+              the OSI Open Source Definition or the FSF Free Software Definition.
+            applicability:
+              - Maturity Level 1
+              - Maturity Level 2
+              - Maturity Level 3
+            recommendation: |
+              If a different license is included with released software assets, 
+              ensure it is an approved license by the Open Source Initiative (OSI), 
+              or a free license as approved by the Free Software Foundation (FSF). 
+              Examples of such licenses include the MIT, BSD 2-clause, BSD 3-clause 
+              revised, Apache 2.0, Lesser GNU General Public License (LGPL), and the 
+              GNU General Public License (GPL). Note that the license for the 
+              released software assets may be different than the source code.
+            recommended-parameters:
+              - id: license_for_released_software_assets
+                description: License requirements for released software assets.
+                default: Apache 2.0
+  - title: Access Control
+    description: |
+      Access Control focuses on the mechanisms and
+      policies that control access to the project's version
+      control system and CI/CD pipelines. These controls help
+      ensure that only authorized users can access sensitive
+      data, modify repository settings, or execute build and
+      release processes.
+    controls:
+      - id: OSPS-AC-01
+        title: |
+          The project's version control system MUST require multi-factor 
+          authentication for users modifying the project respository
+          settings or accessing sensitive data.
+        objective: |
+          Reduce the risk of account compromise or insider threats by requiring
+          multi-factor authentication for collaborators modifying the project
+          repository settings or accessing sensitive data.
+        guideline-mappings:
+          - reference-id: BPB
+            entries:
+              - reference-id: CC-G-1
+          - reference-id: CRA
+            entries:
+              - reference-id: 1.2d
+              - reference-id: 1.2e
+              - reference-id: 1.2f
+          - reference-id: SSDF
+            entries:
+              - reference-id: PO.3.2
+              - reference-id: PS.1
+              - reference-id: PS.2
+          - reference-id: CSF
+            entries:
+              - reference-id: PR.A-02
+              - reference-id: PR.A-05
+          - reference-id: OpenCRE
+            entries:
+              - reference-id: 486-813
+              - reference-id: 124-564
+              - reference-id: 347-352
+              - reference-id: 333-858
+              - reference-id: 152-725
+              - reference-id: 201-246
+          - reference-id: PSSCRM
+            entries:
+              - reference-id: G2.6
+              - reference-id: P3.3
+              - reference-id: E1.2
+              - reference-id: E1.3
+              - reference-id: E1.4
+              - reference-id: E3.1
+          - reference-id: SAMM
+            entries:
+              - reference-id: Operations -Environment Management -Configuration Hardening Lvl1
+          - reference-id: PCIDSS
+            entries:
+              - reference-id: 2.2.1
+              - reference-id: 8.2.1
+              - reference-id: 8.3.1
+          - reference-id: UKSSCOP
+            entries:
+              - reference-id: 2.1
+          - reference-id: 800-161
+            entries:
+              - reference-id: AC-4(21)
+              - reference-id: AC-17
+              - reference-id: CM-5
+              - reference-id: CM-6
+              - reference-id: IA-2
+              - reference-id: IA-5
+              - reference-id: 1.2e
+              - reference-id: 1.2f
+        assessment-requirements:
+          - id: OSPS-AC-01.01
+            text: |
+              When a user attempts to read or modify a sensitive resource in the project's
+              authoritative repository, the system MUST require the user to complete
+              a multi-factor authentication process.
+            applicability:
+              - Maturity Level 1
+              - Maturity Level 2
+              - Maturity Level 3
+            recommendation: |
+              Enforce multi-factor authentication for the project's version
+              control system, requiring collaborators to provide a second form of
+              authentication when accessing sensitive data or modifying repository
+              settings. Passkeys are acceptable for this control.
+            recommended-parameters:
+              - id: required_passkey_authentication_for_sensitive_resources
+                description: Access to sensitive resources requires usage of a passkey.
+                default:
+  - id: OSPS-AC-02
+    title: |
+      The project's version control system MUST restrict collaborator
+      permissions to the lowest available privileges by default.
+    objective: |
+      Reduce the risk of unauthorized access to the project's repository by
+      limiting the permissions granted to new collaborators.
+    guideline-mappings:
+      - reference-id: CRA
+        entries:
+          - reference-id: 1.2f
+      - reference-id: SSDF
+        entries:
+          - reference-id: PO.2
+          - reference-id: PO.3.2
+          - reference-id: PS.1
+          - reference-id: PS.2
+      - reference-id: CSF
+        entries:
+          - reference-id: PR.AA-02
+          - reference-id: PR.AA-05
+      - reference-id: OpenCRE
+        entries:
+          - reference-id: 486-813
+          - reference-id: 124-564
+          - reference-id: 802-056
+          - reference-id: 368-633
+          - reference-id: 152-725
+      - reference-id: PSSCRM
+        entries:
+          - reference-id: P2.3
+          - reference-id: E1.2
+          - reference-id: E3.3
+      - reference-id: PCIDSS
+        entries:
+          - reference-id: 2.2.1
+      - reference-id: UKSSCOP
+        entries:
+          - reference-id: 2.1
+      - reference-id: 800-161
+        entries:
+          - reference-id: AC-2
+          - reference-id: AC-3
+          - reference-id: AC-4(21)
+          - reference-id: AC-5
+          - reference-id: AC-6
+          - reference-id: CM-5
+          - reference-id: CM-7
+    assessment-requirements:
+      - id: OSPS-AC-02.01
+        text: |
+          When a new collaborator is added, the version control system MUST
+          require manual permission assignment, or restrict the collaborator
+          permissions to the lowest available privileges by default.
+        applicability:
+          - Maturity Level 1
+          - Maturity Level 2
+          - Maturity Level 3
+        recommendation: |
+          Most public version control systems are configured in this manner.
+          Ensure the project's version control system always assigns the lowest
+          available permissions to collaborators by default when added, granting
+          additional permissions only when necessary.
+        recommended-parameters:
+          - id: restricted_permissions_for_new_collaborators
+            description: Restricted permissions for new collaborators.
+            default:
+
+
+
+

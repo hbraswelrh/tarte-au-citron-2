@@ -1,0 +1,24 @@
+- control-id: OSPS-QA-07
+  assessments:
+    - requirement-id: OSPS-QA-07.01
+      procedures:
+        - id: "github_branch_protection"
+          name: "GitHub API Verifications for Branch Protection"
+          description: |
+            The procedure performs an automated check of the branch ruleset
+            state in GitHub by creating a snapshot of the state from the API
+            and checks the output with an OPA policy to ensure the outcome
+            meets the baseline requirement.
+- control-id: OSPS-LE-02
+  assessments:
+    - requirement-id: OSPS-LE-02.01
+      procedures:
+        - id: "license_validation"
+          name: "GitHub API Verifications for LICENSE Files"
+          description: |
+            The procedure performs an automated check of the LICENSE file
+            state in GitHub by creating a snapshot of the state from the 
+            API and checks the output with an OPA policy to ensure the 
+            outcome meets the baseline requirement.
+
+
