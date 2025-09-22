@@ -1,0 +1,1 @@
+> Note: Plugin installation using this method is temporary while the plugins are unreleased. The plugin manifests are meant to be generated and signed by a trusted builder and upload as release artifacts.
